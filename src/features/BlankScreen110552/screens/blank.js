@@ -1,106 +1,59 @@
 import React from "react"
-import { View, Image, ImageBackground } from "react-native"
 import {
-  withStyles,
+  View,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
   Text,
   Button,
-  CheckBox,
-  Radio,
-  Toggle,
-  Icon,
-  Input,
-  Datepicker
-} from "react-native-ui-kitten"
+  Switch,
+  TextInput,
+  StyleSheet
+} from "react-native"
+import DateTimePicker from "react-native-datepicker"
+import Icon from "react-native-vector-icons/FontAwesome"
 import Slider from "@react-native-community/slider"
-
+import { CheckBox } from "react-native-elements"
 import { SlideMenuIcon } from "../../../navigator/slideMenuIcon"
-
-export class _Blank extends React.Component {
+import { connect } from "react-redux"
+export class Blank extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    return {
-      headerLeft: <SlideMenuIcon navigationProps={navigation} />
-    }
+    return { headerLeft: <SlideMenuIcon navigationProps={navigation} /> }
   }
-
-  state = {}
-
+  state = { TextInput_5: "" }
   render = () => (
-    <View
-      style={{
-        width: "100%",
-        height: "100%",
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 0,
-        marginBottom: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        overflow: "visible",
-        textAlign: "left",
-        verticalAlign: "baseline",
-        fontSize: 12,
-        color: "#000000",
-        backgroundColor: "#ffffff",
-        fontFamily: "Roboto-Regular",
-        flexDirection: "column",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-        alignItems: "stretch",
-        alignContent: "stretch",
-        borderColor: "#000000",
-        borderStyle: "solid",
-        borderWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderTopWidth: 0,
-        borderBottomWidth: 0,
-        borderRadius: 0,
-        backgroundSize: "auto"
-      }}
-    >
+    <View style={styles.View_1}>
+      <TextInput
+        placeholder="Number Input Placeholder"
+        keyboardType="numeric"
+        value={this.state.TextInput_5}
+        onChangeText={nextValue => this.setState({ TextInput_5: nextValue })}
+      />
+      <Image source={{ uri: "https://via.placeholder.com/150" }} />
       <Icon
         iconFont="Eva Design Icons"
         name="more-horizontal"
-        height={20}
-        width={20}
-        style={{
-          marginLeft: 0,
-          marginRight: 0,
-          marginTop: 5,
-          marginBottom: 5,
-          paddingLeft: 5,
-          paddingRight: 5,
-          paddingTop: 5,
-          paddingBottom: 5,
-          overflow: "visible",
-          textAlign: "left",
-          verticalAlign: "baseline",
-          borderColor: "#000000",
-          borderStyle: "solid",
-          borderWidth: 0,
-          borderLeftWidth: 0,
-          borderRightWidth: 0,
-          borderTopWidth: 0,
-          borderBottomWidth: 0,
-          borderRadius: 0,
-          fontSize: 20,
-          color: "#000000",
-          backgroundColor: "#ffffff",
-          fontFamily: "Roboto-Regular",
-          textDecorationLine: "none",
-          textTransform: "none",
-          lineHeight: 12,
-          letterSpacing: 0
-        }}
+        style={styles.Icon_3}
       />
     </View>
   )
 }
 
-export default Blank = withStyles(_Blank, theme => ({
-  container: {
-    backgroundColor: theme["color-basic-100"]
-  }
-}))
+const styles = StyleSheet.create({
+  container: { flex: 1, marginHorizontal: 16 },
+  View_1: {
+    width: "100%",
+    height: "100%",
+    fontFamily: "Roboto-Regular",
+    alignItems: "stretch"
+  },
+  TextInput_5: {},
+  Image_19: {},
+  Icon_3: { fontFamily: "Roboto-Regular" }
+})
+
+function mapStateToProps(state) {
+  return { state: state.apiReducer }
+}
+const actionCreators = {}
+export default connect(mapStateToProps, actionCreators)(Blank)
